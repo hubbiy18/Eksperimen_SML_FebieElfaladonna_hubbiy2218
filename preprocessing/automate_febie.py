@@ -60,5 +60,5 @@ def preprocess_diabetes_dataset(filepath, save_cleaned=True):
     return df
 
 # Pemanggilan fungsi dengan path file CSV
-file_path = 'path/to/your/diabetes_data.csv'  # Ganti dengan path file dataset Anda
+file_path = '../diabetes_prediction_dataset.csv'
 df_cleaned = preprocess_diabetes_dataset(file_path)
