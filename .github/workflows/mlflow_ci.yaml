@@ -1,0 +1,42 @@
+name: CI MLFlow Train
+
+on:
+  push:
+    paths:
+      - "MLProject/**"
+      - ".github/workflows/preprocess.yml"
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          environment-file: Workflow-CI/MLProject/conda.yaml
+          activate-environment: mlflow-env
+
+      - name: Install MLflow
+        run: pip install mlflow
+
+      - name: Install imblearn
+        run: pip install imblearn
+
+      # Start the MLflow server in the background
+      - name: Start MLflow server
+        run: |
+          nohup mlflow server --host 0.0.0.0 --port 5000 &
+          sleep 10  # Wait a moment for the server to start
+
+      - name: Run MLflow Project
+        run: |
+          cd Workflow-CI/MLProject
+          python modelling.py
+        env:
+          MLFLOW_TRACKING_URI: http://127.0.0.1:5000
