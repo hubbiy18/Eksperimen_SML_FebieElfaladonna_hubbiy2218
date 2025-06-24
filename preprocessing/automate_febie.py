@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -20,7 +19,7 @@ def preprocess_diabetes_dataset(filepath, save_cleaned=True):
     """
 
     # 1. Load dataset
-    df = pd.read_csv(filepath)
+    df = pd.read_csv(filepath)  # Membaca dataset dari file CSV
     print(f"Data awal: {df.shape[0]} baris, {df.shape[1]} kolom")
 
     # 2. Drop duplicates
@@ -59,3 +58,7 @@ def preprocess_diabetes_dataset(filepath, save_cleaned=True):
     # 8. Return dataframe
     print("Distribusi label diabetes:\n", df['diabetes'].value_counts())
     return df
+
+# Pemanggilan fungsi dengan path file CSV
+file_path = 'path/to/your/diabetes_data.csv'  # Ganti dengan path file dataset Anda
+df_cleaned = preprocess_diabetes_dataset(file_path)
