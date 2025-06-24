@@ -1,0 +1,11 @@
+name: diabetes_rf_training
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      cleaned_filepath: { type: str, default: "diabetes_cleaned.csv" }
+      model_output: { type: str, default: "rf_model.pkl" }
+    command: >
+      python modelling.py --cleaned_filepath {cleaned_filepath} --model_output {model_output}

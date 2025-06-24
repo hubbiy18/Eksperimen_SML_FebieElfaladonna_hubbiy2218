@@ -1,0 +1,13 @@
+name: mlflow-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - mlflow
+      - pandas
+      - scikit-learn
+      - imbalanced-learn
+      - joblib
